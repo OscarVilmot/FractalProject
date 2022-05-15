@@ -16,8 +16,6 @@ class fractalJulia:
                 return i
         return threshold - 1
    
-
-
 def calculateArray(start, size, precision, fractal, threshold = 20, limit = 4.):
     X = np.linspace(start[0], start[0] + size[0], num = size[0]*precision)
     Y = np.linspace(start[1], start[1] + size[1], num = size[1]*precision)

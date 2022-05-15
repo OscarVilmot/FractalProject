@@ -1,26 +1,36 @@
-import math
-import matplotlib.pyplot as plt
-import matplotlib
-from matplotlib.widgets import Slider
-matplotlib.use('Qt5Agg')
+import sys
+from PyQt5.QtWidgets import QApplication
+from PyQt5.QtWidgets import QWidget
+from PyQt5.QtWidgets import QLabel
+from PyQt5.QtWidgets import QMenuBar
+from PyQt5.QtWidgets import QAction
 
-def showGUI(fig, Array, sliders):
-    ax = fig.subplots()
+app = QApplication(sys.argv)
+screen_resolution = app.desktop().screenGeometry()
 
-    ax.clear()
-    plt.tick_params(left = False, right = False , labelleft = False ,
-                labelbottom = False, bottom = False)
+width, height = screen_resolution.width(), screen_resolution.height()
+window_height, window_width = (int)(height/6), (int)(width/6)
 
-    ax.imshow(Array, interpolation="bicubic", cmap='plasma')
-    plt.show()
+window = QWidget()
+window.setWindowTitle("Fractals")
+window.setGeometry(width, height, window_width, window_height)
+window.move(60,15)
 
-def sliders(fig):
-    C1slider = plt.axes([.2,.2,.65,.03])
-    C2slider = plt.axes([.2,.1,.65,.03])
+menubar = QMenuBar(parent=window)
 
-    C1 = Slider(C1slider, "c1", valmin=-math.pi,valmax=math.pi,valinit=0,valstep=0.002)
-    C2 = Slider(C2slider, "c2", valmin=-math.pi,valmax=math.pi,valinit=0,valstep=0.002)
+"""Define the exit tool"""
+exitaction = QAction('&Exit', window)
+exitaction.setShortcut('Ctrl+Q')
+exitaction.setStatusTip('Exit application')
+exitaction.triggered.connect(app.quit)
 
-    return C1, C2
+"""Define the tool menu"""
+toolsmenu = menubar.addMenu('&Tools')
+toolsmenu.addAction(exitaction)
 
-    
+"""Define the tools menu"""
+menubar.addAction('Fractals')
+
+"""Show the main window"""
+window.show()
+sys.exit(app.exec_())

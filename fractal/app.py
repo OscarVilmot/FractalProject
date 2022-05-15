@@ -1,4 +1,4 @@
-from fractal.common.GUI import showGUI, sliders
+from fractal.module.JuliaGUI_mpl import showGUI, sliders
 from fractal.common.JuliasFractal import calculateArray, fractalJulia
 from matplotlib.pyplot import subplots_adjust, figure
 
@@ -8,7 +8,7 @@ def run():
 
     start = [-1.5,-1.5]
     size = [3,3]
-    precision = 200
+    precision = 100
 
     C1 = 0
     C2 = 0
